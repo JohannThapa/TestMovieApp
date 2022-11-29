@@ -1,0 +1,50 @@
+.header {
+  height: 50px;
+  background: white;
+  position: fixed;
+  width: 100%;
+  border-bottom: 2px solid #dedede;
+  z-index: 9000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.search {
+  flex: 0 0 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(153,153,153,.3);
+  border-radius: 20px;
+  &__input {
+    width: 90%;
+    border-radius: 15px;
+    background-color: white;
+    border: none;
+    outline: none;
+    padding: 8px;
+    padding-left: 13px;
+    font-weight: 400;
+    color: #070707;
+    transition: width .5s ease-out;
+    margin-right: -30px;
+
+    &::placeholder {
+      color: #969090;
+    }
+
+    &:focus {
+      width: 95%;
+    }
+  }
+
+  &__icon {
+    height: 22px;
+
+    &:active {
+      transform: translateY(2px);
+    }
+  }
+}
