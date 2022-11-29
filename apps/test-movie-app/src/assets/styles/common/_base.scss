@@ -4,6 +4,8 @@
 @import "../variables";
 
 body {
+   padding-top: 20px;
+   padding-left: 80px;
   background: map_get($body-scheme, main);
   color: map_get($body-scheme, opposite);
   font-family: $body-font-family;

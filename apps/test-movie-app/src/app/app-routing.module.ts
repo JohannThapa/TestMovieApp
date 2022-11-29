@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HomepageComponent } from './pages/homepage/homepage.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: '', component: HomepageComponent, pathMatch: 'full'},
+];
 
 @NgModule({
   imports: [

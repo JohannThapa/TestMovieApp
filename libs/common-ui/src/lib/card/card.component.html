@@ -1,0 +1,49 @@
+
+<div class="container">
+  <div class="cellphone-container">
+      <div class="movie">
+        <div class="menu"><i class="material-icons"></i></div>
+        <div class="movie-img"  [ngStyle]="{'background': 'url(' + imagify(model.poster_path) + ')'}"></div>
+        <div class="text-movie-cont">
+          <div class="mr-grid">
+            <div class="col1">
+              <h1> {{model.title}}</h1>
+              <ul class="movie-gen">
+                <li> {{model.release_date | date}}</li>
+                <li>Adventure, Drama, Sci-Fi,</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mr-grid summary-row">
+            <div class="col2">
+              <h5>SUMMARY</h5>
+            </div>
+            <div class="col2">
+               <ul class="movie-likes">
+                <li><i class="material-icons">&#xE813;</i>{{model.vote_count}}</li>
+                <li><i class="material-icons">&#xE813;</i>{{model.vote_average}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mr-grid" *ngIf="model.overview">
+            <div class="col1">
+              <p class="movie-description" *ngIf="model.title.length>20">
+                {{model.overview | slice: 0: 40}}...
+              </p>
+              <p class="movie-description" *ngIf="model.title.length<=20">
+                {{model.overview | slice: 0: 120}}...
+              </p>
+              </div>
+          </div>
+          <div class="mr-grid action-row">
+            <div class="col2">
+              <a [href]="'/movies/detail/' + model.id" target="_blank">
+                <div class="watch-btn"><h3><i class="material-icons">&#xE037;</i>VIEW DETAILS</h3></div>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
