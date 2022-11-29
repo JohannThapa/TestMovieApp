@@ -1,0 +1,41 @@
+/*
+// .btn
+*/
+@import "../variables";
+@import "../mixins/btn";
+
+.btn {
+  @include btn;
+  &.disabled,
+  &:disabled {
+    cursor: default;
+  }
+}
+.btn-icon {
+  padding: 0;
+
+  svg {
+    display: block;
+    margin: auto;
+  }
+}
+
+.btn {
+  @include btn-size(nl);
+}
+.btn-sm {
+  @include btn-size(sm);
+}
+.btn-xs {
+  @include btn-size(xs);
+}
+.btn-lg {
+  @include btn-size(lg);
+}
+.btn-xl {
+  @include btn-size(xl);
+}
+
+@include btn-variant(primary, $btn-primary-scheme);
+@include btn-variant(secondary, $btn-secondary-scheme);
+@include btn-variant(muted, $btn-muted-scheme);
