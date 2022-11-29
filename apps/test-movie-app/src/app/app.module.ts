@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { MoviesService } from './common/services/movies.service';
 import { CommonUiModule } from '@test-movie-app/common-ui';
+import { MoviesModule } from './modules/movies/movies.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { CommonUiModule } from '@test-movie-app/common-ui';
     SidebarComponent,
     HomepageComponent,
   ],
-  imports: [BrowserModule,CommonUiModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule,CommonUiModule, AppRoutingModule, HttpClientModule, MoviesModule],
   providers: [
     MoviesService
   ],

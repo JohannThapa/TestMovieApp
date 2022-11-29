@@ -4,6 +4,9 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent, pathMatch: 'full'},
+  {path: 'movies', loadChildren: () => import('./modules/movies/movies.module').then(m => m.MoviesModule)},
+  {path: 'trending', loadChildren: () => import('./modules/trending/trending.module').then(m => m.TrendingModule)},
+
 ];
 
 @NgModule({
