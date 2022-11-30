@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <test-movie-app-banner [title]="'Top Rated'" [movies]="moviesList | slice: 7:14"></test-movie-app-banner>
+
+  <div class="row" style="margin-top: -40px">
+    <div class="col"  *ngFor="let item of moviesList | slice:0:15">
+      <test-movie-app-card  [model]="item" [isMovie]="true"></test-movie-app-card>
+    </div>
+  </div>
+</div>

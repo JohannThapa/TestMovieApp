@@ -1,6 +1,37 @@
   <div class="header">
     <form class="search">
-      <input type="text" class="search__input" placeholder="Search">
+      <input type="text"
+      type="text"
+      id="site-search"
+      autocapitalize="off"
+      autocomplete="off"
+      spellcheck="false"
+      name="search"
+      class="search__input"
+      (click)="open()"
+      (input)="open()"
+    [formControl]="query"
+      placeholder="Search">
       <img src="assets/images/search-icon.png" class="search__icon">
     </form>
   </div>
+  <div
+  class="search__dropdown search__dropdown--suggestions suggestions"
+  [class.search__dropdown--open]="suggestionsIsOpen && hasSuggestions"
+>
+  <div class="suggestions__group" [ngStyle]="{'display': !suggestionsIsOpen ? 'none' : ''}">
+      <div class="suggestions__group-title">Total Searched: {{Length}}</div>
+      <div class="suggestions__group-content">
+          <a    *ngFor="let item of results|slice:0:8"
+              class="suggestions__item suggestions__product"
+              (click)="AutoCompleteSearch(item.name)"
+          >
+              <div class="suggestions__product-info">
+                  <div class="suggestions__product-name" [routerLink]="'/movies/detail/'+item.id">
+           {{item.name}}
+                  </div>
+              </div>
+          </a>
+      </div>
+  </div>
+</div>

@@ -1,12 +1,8 @@
 <div class="container-fluid">
-  <div id="welcome">
-    <h1>
-      <span> Trending 👋 </span>
-    </h1>
-  </div>
+  <test-movie-app-banner [title]="'Trending'" [movies]="moviesList | slice: 7:14"></test-movie-app-banner>
 
   <div class="row" style="margin-top: -40px">
-    <div class="col-3 px-4 ml-2"  *ngFor="let item of moviesList | slice:0:15">
+    <div class="col"  *ngFor="let item of moviesList | slice:0:15">
       <test-movie-app-card  [model]="item" [isMovie]="true"></test-movie-app-card>
     </div>
   </div>

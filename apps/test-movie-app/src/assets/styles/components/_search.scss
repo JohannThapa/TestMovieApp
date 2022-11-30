@@ -1,0 +1,101 @@
+/*
+// .widget-search
+*/
+@import '../variables';
+@import '../mixins/card';
+
+
+$local-height: 52px;
+$local-line-height: 21px;
+
+
+.widget-search {}
+.widget-search__form {
+    display: flex;
+    position: relative;
+    z-index: 0;
+}
+
+.widget-search__button {
+    flex-shrink: 0;
+    border: none;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $widget-search-button-icon-color;
+    fill: currentColor;
+    width: $local-height;
+    height: $local-height;
+    padding: 0;
+
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        color: $widget-search-button-hover-icon-color;
+        background: $widget-search-button-hover-bg-color;
+    }
+    &:active {
+        color: $widget-search-button-active-icon-color;
+        background: $widget-search-button-active-bg-color;
+    }
+}
+.widget-search__field {
+    position: absolute;
+    display: block;
+    content: '';
+    z-index: -1;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1px;
+    transition: box-shadow .2s;
+}
+
+.widget-search__form:hover .widget-search__field {
+    box-shadow: $widget-search-input-hover-shadow;
+}
+.widget-search__input:focus ~ .widget-search__field {
+    box-shadow: $widget-search-input-focus-shadow;
+}
+/*
+// .search
+*/
+
+
+@include desktop-header-variant-selector {
+    .search {}
+    .search__dropdown {
+        $local-timing: cubic-bezier(0.645, 0.045, 0.355, 1);
+        $local-duration: .25s;
+
+        color: map_get($menu-scheme, opposite);
+        background-color: map_get($menu-scheme, main);
+        box-shadow: map_get($menu-scheme, shadow);
+        position: absolute;
+        top: 100%;
+        border-radius: 1.5px;
+        opacity: 0;
+        transform: translateY(26px);
+        visibility: hidden;
+        transition:
+            opacity $local-duration $local-timing,
+            transform $local-duration $local-timing,
+            visibility 0s $local-duration;
+
+    }
+    .search__dropdown--open {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+        transition-delay: 0s;
+    }
+    .search__button-icon svg {
+        display: block;
+    }
+}
+
+
+@import '../mixins/classic-search';

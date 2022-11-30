@@ -11,6 +11,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { MoviesService } from './common/services/movies.service';
 import { CommonUiModule } from '@test-movie-app/common-ui';
 import { MoviesModule } from './modules/movies/movies.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,10 +21,16 @@ import { MoviesModule } from './modules/movies/movies.module';
     SidebarComponent,
     HomepageComponent,
   ],
-  imports: [BrowserModule,CommonUiModule, AppRoutingModule, HttpClientModule, MoviesModule],
-  providers: [
-    MoviesService
+  imports: [
+    BrowserModule,
+    CommonUiModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MoviesModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
+  providers: [MoviesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

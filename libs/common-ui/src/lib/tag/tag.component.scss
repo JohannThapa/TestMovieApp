@@ -1,0 +1,33 @@
+$repeat: 10; // 10 iterations
+.tag-color {
+  @for $i from 1 through $repeat {
+    &:nth-child(#{$i}) {
+      background-color: rgb(random(255), random(255), random(255));
+    }
+  }
+}
+
+.tag {
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0.2em 0.5em 0.3em;
+  border-radius: 15px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  color: white;
+  background: #3454d1;
+  font-weight: 900;
+  margin: 0;
+  margin: 0.115em 0.1em;
+  box-shadow: 3px 8px 8px -5px rgba(0,0,0,0.5);
+  &-sm{
+  font-size: 13px;
+  display: inline-block;
+  letter-spacing: .15ch;
+  font-weight: 400
+  }
+  &-lg {
+    font-size: 1.2em;
+    border-radius: 4px;
+  }
+
+}

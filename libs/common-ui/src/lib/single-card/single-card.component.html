@@ -1,0 +1,20 @@
+<figure class="movie-single" >
+  <div class="movie-single__hero">
+    <img style="width: 100%;margin-bottom: -8px;"  [src]="imagify(model.poster_path)" alt="image" class="movie-single__img">
+  </div>
+  <div class="movie-single__content">
+    <div class="movie-single__title">
+      <h1 class="heading-single__primary">{{model.title}}</h1>
+      <div class="movie-single__tag movie-single__tag--1">#action</div>
+      <div class="movie-single__tag movie-single__tag--2">#thriller</div>
+    </div>
+    <p class="movie-single__description">
+      {{model.overview | slice: 0: 180}}...
+    </p>
+    <div class="movie-single__details">
+      <p class="movie-single__detail"><span class="icons icons-blue">Popularity: </span>{{model.popularity}}</p>
+      <p class="movie-single__detail"><span class="icons icons-red">Released date: </span> {{model.release_date | date}}</p>
+    </div>
+  </div>
+  <div class="movie-single__price">★{{model.vote_average}} ( {{model.vote_count}} )</div>
+</figure>

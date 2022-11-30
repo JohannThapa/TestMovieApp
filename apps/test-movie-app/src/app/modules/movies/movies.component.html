@@ -1,7 +1,259 @@
-<div class="container-fluid">
-  <div id="welcome">
-    <h1>
-      <span> Movies 👋 </span>
-    </h1>
+<ng-container>
+  <div class="sidebar__body">
+    <div class="sidebar__header">
+      <div class="sidebar__title">
+        <div id="welcome">
+          <h1 style="text-align: center">
+            <span> Movies 👋 </span>
+          </h1>
+        </div>
+      </div>
+      <button
+        class="sidebar__close"
+        type="button"
+        style="display: none"
+      ></button>
+    </div>
+    <div class="sidebar__content">
+      <div class="widget__header widget-filters__header">
+        <h4 class="mt-1 mb-1 text-center">Filters</h4>
+      </div>
+      <div class="widget-filters__list mt-2" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div *ngFor="let filter of hello" class="widget-filters__item">
+          <div
+            class="filter filter--opened"
+            appCollapseItem="filter--opened"
+            #collapseItem="appCollapseItem"
+          >
+            <button
+              type="button"
+              class="filter__title"
+              (click)="collapseItem.toggle()"
+            >
+              {{ filter }}
+              <span class="filter__arrow">
+                <img
+                  src="../../../assets/images/up-arrow-hand-drawn-outline-svgrepo-com.svg"
+                  style="width: 18px; margin-bottom: -2px"
+                />
+              </span>
+            </button>
+            <div class="filter__body" appCollapseContent>
+              <div class="filter__container">
+                <ul class="filter-category__list" *ngIf="filter === 'Category'">
+                  <ng-container *ngFor="let item of maincategory">
+                    <li
+                      class="filter-category__item"
+                      [class.filter-category__item--current]="maincategory"
+                    >
+                      <a [routerLink]="item.id">{{ item.name }}</a>
+                    </li>
+                    <ng-container *ngFor="let child of item.children">
+                      <li
+                        class="filter-category__item filter-category__item--child"
+                      >
+                        <a>{{ child.name }}</a>
+                      </li>
+                    </ng-container>
+                  </ng-container>
+                </ul>
+                <ng-container *ngIf="filter === 'Sort By'">
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <select
+                        id="sortBy"
+                        class="form-control"
+                        formControlName="sort_by"
+                      >
+                        <option
+                          *ngFor="let sort of sortBy"
+                          [value]="sort.value"
+                        >
+                          {{ sort.name }}
+                        </option>
+                      </select>
+                      <div class="invalid-feedback">
+                        <!-- <div *ngIf="form.controls.language|hasError:'required'">
+
+                                    </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="filter === 'Genres'">
+                  <div class="genres-tag">
+                    <button class="genre-tag" *ngFor="let item of genres">
+                      <test-movie-app-tag
+                        [name]="item.name"
+                        [color]="item.color"
+                      ></test-movie-app-tag>
+                    </button>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="filter === 'Languages'">
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <select
+                        id="Languages-country"
+                        class="form-control"
+                        formControlName="language"
+                      >
+                        <option value="">--Select--</option>
+                        <option
+                          *ngFor="let country of languages"
+                          [value]="country.iso_639_1"
+                        >
+                          {{ country.english_name }}
+                        </option>
+                      </select>
+                      <div class="invalid-feedback">
+                        <!-- <div *ngIf="form.controls.language|hasError:'required'">
+
+                                    </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="filter === 'User score'">
+                  <section class="range-slider mt-2 mb-2">
+                    <span class="rangeValues">{{ rated }}</span>
+                    <input
+                      [value]="minRange"
+                      min="0"
+                      max="10"
+                      step="1"
+                      type="range"
+                      (change)="minRangeHandler($event)"
+                    />
+                    <input
+                      [value]="maxRange"
+                      min="0"
+                      max="10"
+                      step="1"
+                      type="range"
+                      (change)="maxRangeHandler($event, minRange)"
+                    />
+                    <div class="score-range mt-2">
+                      <span class="range-number"> min</span>
+                      <span class="range-number"> </span>
+                      <span class="range-number"> max</span>
+                    </div>
+                  </section>
+                </ng-container>
+                <ng-container *ngIf="filter === 'Runtime'">
+                  <div class="range-row">
+                    <div class="range-box">
+                      <i class="far fa-sun"></i>
+                      <input
+                        type="range"
+                        id="runrange"
+                        min="0"
+                        max="500"
+                        [value]="runtimeRange"
+                        (change)="inputrunRangeHandler($event)"
+                      />
+                      <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="score-range">
+                      <span class="range-number"> 0</span>
+                      <span class="range-number"> {{ runtimeRange }} min</span>
+                      <span class="range-number"> 500</span>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="filter === 'Availabilities'">
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <span class="input-check__body">
+                        <input
+                          class="input-check__input"
+                          type="checkbox"
+                          formControlName="show_all"
+                          [readonly]="true"
+                        />
+                        <span class="input-check__box">
+                          Search all availabilities?</span
+                        >
+                        <span class="input-check__icon">
+                          <svg width="9px" height="7px">
+                            <path
+                              d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z"
+                            />
+                          </svg>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="filter === 'Show Me'">
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <div class="input-radio-label">
+                        <div class="input-radio-label__list">
+                          <label class="input-radio-label__item">
+                            <input
+                              type="radio"
+                              name="show_me"
+                              class="input-radio-label__input"
+                              [value]="0"
+                              formControlName="show_me"
+                            />
+                            <span class="input-radio-label__title"
+                              >Everything</span
+                            >
+                          </label>
+                          <label class="input-radio-label__item">
+                            <input
+                              type="radio"
+                              name="show_me"
+                              class="input-radio-label__input"
+                              [value]="1"
+                              formControlName="show_me"
+                            />
+                            <span class="input-radio-label__title"
+                              >Movies I Haven't Seen</span
+                            >
+                          </label>
+                          <label class="input-radio-label__item">
+                            <input
+                              type="radio"
+                              name="show_me"
+                              class="input-radio-label__input"
+                              [value]="2"
+                              formControlName="show_me"
+                            />
+                            <span class="input-radio-label__title"
+                              >Movies I Have Seen</span
+                            >
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="widget-filters__actions ">
+          <button class="btn btn-primary btn-lg"   type="submit" (click)="onSubmit()" style="text-align: center;background: #3454d1 !important;">Submit</button>
+      </div>
+
+      <div></div>
+    </div>
   </div>
-</div>
+  <div class="main-container">
+    <div class="container-fluid ">
+      <div class="row" style="margin-top: -40px">
+        <div class="col-12"  *ngFor="let item of moviesList | slice:0:15">
+          <a style="text-decoration: none" [routerLink]="'/movies/detail/' + returnId(item)">
+            <test-movie-app-single-card  [model]="item" [isMovie]="true"></test-movie-app-single-card>
+
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-container>

@@ -1,9 +1,8 @@
 
-<div class="container">
+<div class="card-container" [ngStyle]="">
   <div class="cellphone-container">
       <div class="movie">
-        <div class="menu"><i class="material-icons"></i></div>
-        <div class="movie-img"  [ngStyle]="{'background': 'url(' + imagify(model.poster_path) + ')'}"></div>
+        <div class="movie-img"  [ngStyle]="{'background': 'url(' + imagify(model.poster_path) + ')','background-size': 'cover'}"></div>
         <div class="text-movie-cont">
           <div class="mr-grid">
             <div class="col1">
@@ -20,8 +19,8 @@
             </div>
             <div class="col2">
                <ul class="movie-likes">
-                <li><i class="material-icons">&#xE813;</i>{{model.vote_count}}</li>
-                <li><i class="material-icons">&#xE813;</i>{{model.vote_average}}</li>
+                <li><i class="material-icons">&#xE813;</i>❤{{model.vote_count}}</li>
+                <li><i class="material-icons">&#xE813;</i>★{{model.vote_average}}</li>
               </ul>
             </div>
           </div>
@@ -31,7 +30,7 @@
                 {{model.overview | slice: 0: 40}}...
               </p>
               <p class="movie-description" *ngIf="model.title.length<=20">
-                {{model.overview | slice: 0: 120}}...
+                {{model.overview | slice: 0: 100}}...
               </p>
               </div>
           </div>

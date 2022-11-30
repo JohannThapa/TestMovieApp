@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,12 +34,23 @@ export class MoviesService {
   getAllGenres(): Observable<any> {
     return this.http.get(`${this.baseUrl}genre/movie/list?api_key=${this.apiKey}&language=${this.language}`)
   }
-
+  getAllLanguages(): Observable<any> {
+    return this.http.get(`${this.baseUrl}configuration/languages?api_key=${this.apiKey}`)
+  }
   getMovieDetails(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}movie/${id}?api_key=${this.apiKey}`)
   }
 
-
+  getByFilter(form: any,min:number, max: number, runtime: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=${form.sort_by}&include_adult=false&page=1&vote_average.gte=${min}&vote_average.lte=${max}&with_runtime.gte=0&with_runtime.lte=${runtime}&show_me=${form.show_me}`).pipe(map(res => {
+      return res.results;
+    }))
+  }
+  searchByKeyWords(key: string){
+    return this.http.get<any>(`${this.baseUrl}/search/keyword?api_key=${this.apiKey}&query=${key}`).pipe(map(res => {
+      return res;
+    }));
+  }
   getMovieCredits(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}movie/${id}/credits?api_key=${this.apiKey}`)
   }

@@ -9,3 +9,9 @@
         color: map_get($card-scheme, opposite);
     }
 }
+@mixin desktop-header-variant-selector() {
+    .site--desktop-header--#classic-two {
+        @content;
+    }
+}
+

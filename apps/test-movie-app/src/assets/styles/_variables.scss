@@ -34,7 +34,13 @@ $icon-color: rgba($dark, 0.75);
 $divider: rgba($dark, 0.1);
 $arrow-color: rgba($dark, 0.3);
 $box-shadow: 0 0 $dark, 0 0 $dark, 0 10px 15px -3px rgba($dark, 0.1), 0 4px 6px -2px rgba($dark, 0.05);
-
+$widget-search-button-icon-color: #bfbfbf !default;
+$widget-search-button-hover-bg-color: #f5f5f5 !default;
+$widget-search-button-hover-icon-color: #a6a6a6 !default;
+$widget-search-button-active-bg-color: #f0f0f0 !default;
+$widget-search-button-active-icon-color: #a6a6a6 !default;
+$widget-search-input-hover-shadow: 0 0 0 1px rgba(#000, 0.1) !default;
+$widget-search-input-focus-shadow: 0 0 0 3px rgba(#000, 0.1) !default;
 // ----------------------------------------
 // -- theme
 // ----------------------------------------
@@ -60,24 +66,30 @@ $theme-scheme: register-scheme(
     $theme-scheme
   )
 );
-  // dark
-  $dark-scheme: () !default;
-  $dark-scheme: register-scheme(map_merge((
-     name:         dark,
-     // colors
-     main:         $dark,
-     opposite:     white, opposite-font-weight-map: $font-weight-decrease-map,
-     opposite-alt: #ccc,
-     muted:        #9e9e9e,
-     // states
-     hover:        rgba(#fff, .08),
-     active:       rgba(#fff, .12),
-     // decor
-     divider:      #4d4d4d,
-     arrow-color:  #808080,
-     icon-color:   #fff,
-     shadow:       none,
-  ), $dark-scheme));
+// dark
+$dark-scheme: () !default;
+$dark-scheme: register-scheme(
+  map_merge(
+    (
+      name: dark,
+      // colors
+      main: $dark,
+      opposite: white,
+      opposite-font-weight-map: $font-weight-decrease-map,
+      opposite-alt: #ccc,
+      muted: #9e9e9e,
+      // states
+      hover: rgba(#fff, 0.08),
+      active: rgba(#fff, 0.12),
+      // decor
+      divider: #4d4d4d,
+      arrow-color: #808080,
+      icon-color: #fff,
+      shadow: none,
+    ),
+    $dark-scheme
+  )
+);
 // light
 $light-scheme: () !default;
 $light-scheme: register-scheme(
@@ -253,5 +265,156 @@ $btn-muted-scheme: map_merge(
   $btn-muted-scheme
 );
 
-
 $link-color: darken(map_get($theme-scheme, main), 8%) !default;
+// ----------------------------------------
+// -- .input-radio
+// ----------------------------------------
+// normal
+$input-radio-circle-bg: #fff !default;
+$input-radio-circle-shadow: 0 0 0 1px rgba(#000, 0.17) inset !default;
+$input-radio-inner-circle-color: #fff !default;
+// checked
+$input-radio-checked-circle-bg: map_get($theme-scheme, main) !default;
+$input-radio-checked-circle-shadow: 0 0 0 1px rgba(#000, 0.08) inset !default;
+$input-radio-checked-inner-circle-color: map_get($theme-scheme, opposite) !default;
+// disabled
+$input-radio-disabled-circle-bg: #f2f2f2 !default;
+$input-radio-disabled-circle-shadow: 0 0 0 1px rgba(#000, 0.12) inset !default;
+$input-radio-disabled-inner-circle-color: rgba(#000, 0.2) !default;
+
+// ----------------------------------------
+// -- .input-radio-label
+// ----------------------------------------
+// normal
+$input-radio-label-bg-color: #fff !default;
+$input-radio-label-border-color: rgba(#000, 0.1) !default;
+// hover
+$input-radio-label-hover-border-color: rgba(#000, 0.1) !default;
+// active
+$input-radio-label-active-border-color: rgba(#000, 0.2) !default;
+// checked
+$input-radio-label-checked-border-color: map_get($theme-scheme, main) !default;
+// disabled
+$input-radio-label-disabled-font-color: #a6a6a6 !default;
+// ----------------------------------------
+// -- .form-control
+// ----------------------------------------
+$form-control-select-arrow-color: rgba(#000, 0.55) !default;
+
+// default
+$form-control-default-scheme: () !default;
+$form-control-default-scheme: map_merge(
+  (
+    // normal
+    normal-bg-color: #ebebeb,
+    normal-border-color: #ebebeb,
+    normal-font-color: #262626,
+    normal-placeholder-color: #6c757d,
+    // hover
+    hover-border-color: #d9d9d9,
+    // focus
+    focus-bg-color: #fff,
+    focus-border-color: #d9d9d9
+  ),
+  $form-control-default-scheme
+);
+
+// valid
+$form-control-valid-scheme: () !default;
+$form-control-valid-scheme: map_merge(
+  $form-control-default-scheme,
+  map_merge(
+    (
+      // normal
+      normal-bg-color: #e2f2da,
+      normal-border-color: #e2f2da,
+      // hover
+      hover-border-color: #c3d9b8,
+      // focus
+      focus-border-color: #88cc66
+    ),
+    $form-control-valid-scheme
+  )
+);
+
+// invalid
+$form-control-invalid-scheme: () !default;
+$form-control-invalid-scheme: map_merge(
+  $form-control-default-scheme,
+  map_merge(
+    (
+      // normal
+      normal-bg-color: #f2dada,
+      normal-border-color: #f2dada,
+      // hover
+      hover-border-color: #d9a3a3,
+      // focus
+      focus-border-color: #cc6666
+    ),
+    $form-control-invalid-scheme
+  )
+);
+
+// dark
+$form-control-dark-scheme: () !default;
+$form-control-dark-scheme: map_merge(
+  (
+    // normal
+    normal-bg-color: #4c4c4c,
+    normal-border-color: #4c4c4c,
+    normal-font-color: #fff,
+    normal-placeholder-color: #b2b2b2,
+    // hover
+    hover-bg-color: rgba(#fff, 0.16),
+    hover-border-color: rgba(#fff, 0.16),
+    // focus
+    focus-bg-color: transparent,
+    focus-border-color: rgba(#fff, 0.16),
+    focus-placeholder-color: #9e9e9e
+  ),
+  $form-control-dark-scheme
+);
+
+// button
+$form-control-button-scheme: () !default;
+$form-control-button-scheme: map_merge(
+  (
+    // normal
+    normal-bg-color: fff,
+    normal-font-color: #6c757d,
+    // hover
+    hover-bg-color: #333,
+    hover-font-color: #fff,
+    // active
+    active-bg-color: lighten(#333, 10%),
+    active-font-color: #fff
+  ),
+  $form-control-button-scheme
+);
+
+// ----------------------------------------
+// -- .select2-dropdown
+// ----------------------------------------
+
+$header-layout:spaceship     !default;
+$header-variant-name:spaceship-one !default;
+$spaceship-ledge-height:24px          !default;
+
+$select2-dropdown-bg: #fff !default;
+$select2-dropdown-shadow: 0 1px 20px rgba(#000, 0.2), 0 1px 5px rgba(#000, 0.1) !default;
+$select2-dropdown-divider: #e5e5e5 !default;
+$select2-dropdown-item-selected-bg-color: #f2f2f2 !default;
+$select2-dropdown-item-highlighted-bg-color: #d9ecff !default;
+$select2-dropdown-item-highlighted-font-color: #36414d !default;
+$menu-scheme-based-on: light !default;
+$menu-scheme: () !default;
+$menu-scheme: map-merge-all(get-scheme($menu-scheme-based-on), (
+   shadow: 0 2px 20px rgba(#000, .2),
+), $menu-scheme);
+
+// small
+$menu-small-scheme-based-on: $menu-scheme !default;
+$menu-small-scheme: () !default;
+$menu-small-scheme: map-merge-all(get-scheme($menu-small-scheme-based-on), (
+   shadow: (0 1px 15px rgba(#000, .1), 0 1px 3px rgba(#000, .1)),
+), $menu-small-scheme);
